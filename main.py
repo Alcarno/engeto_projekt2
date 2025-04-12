@@ -5,13 +5,15 @@ author: Jakub Lada
 email: jakub.lada@seznam.cz
 """
 
-def print_board(board):
+def print_board(board: list[list[str]]) -> None:
+    """Vyprintuje aktuální stav hracího pole."""
     print("+---+---+---+")
     for row in board:
         print("| " + " | ".join(row) + " |")
         print("+---+---+---+")
 
-def check_winner(board, player):
+def check_winner(board: list[list[str]], player: str) -> bool:
+    """Zkontroluje, zda daný hráč vyhrál."""
     for row in board:
         if all([cell == player for cell in row]):
             return True
@@ -22,11 +24,8 @@ def check_winner(board, player):
         return True
     return False
 
-def tic_tac_toe():
-    board = [[" " for _ in range(3)] for _ in range(3)]
-    current_player = "X"
-    moves = 0
-
+def print_rules() -> None:
+    """Vyprintuje pravidla hry."""
     print("Welcome to Tic Tac Toe")
     print("="*40)
     print("GAME RULES:")
@@ -40,11 +39,23 @@ def tic_tac_toe():
     print("="*40)
     print("Let's start the game")
 
+def initialize_board() -> list[list[str]]:
+    """Inicializuje prázdné hrací pole."""
+    return [[" " for _ in range(3)] for _ in range(3)]
+
+def tic_tac_toe() -> None:
+    board = initialize_board()  # Inicializace hracího pole přesunuta do samostatné funkce
+    current_player = "X"
+    moves = 0  # Počet tahů, sleduje kolik tahů bylo provedeno
+    print_rules()  # Pravidla zapouzdřena do samostatné funkce
+
     while moves < 9:
         print_board(board)
         try:
+            # Výzva k zadání vstupu s vysvětlením mapování čísel na pozice
             move = int(input(f"Player {current_player} | Please enter your move number (1-9): ")) - 1
-            if move < 0 or move >= 9:
+            # Převod z 1-9 na indexy hracího pole
+            if not (0 <= move < 9):  # Zjednodušená podmínka pro kontrolu platnosti tahu
                 print("Invalid move. Please enter a number between 1 and 9.")
                 continue
             row, col = divmod(move, 3)
@@ -60,6 +71,8 @@ def tic_tac_toe():
             current_player = "O" if current_player == "X" else "X"
         except ValueError:
             print("Invalid input. Please enter a number.")
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
 
     print("It's a draw!")
 
