@@ -60,8 +60,6 @@ Po spuštění skript projde všechny obce v daném okrese, stáhne jejich výsl
 
 ## Jak vypadá výstupní CSV
 
-![Ukázka CSV](ukazka_csv.jpg)
-
 | kód obce | název obce | voliči v seznamu | vydané obálky | platné hlasy | Občanská demokratická strana | Řád národa - Vlastenecká unie | ...další strany... |
 |----------|------------|------------------|---------------|--------------|------------------------------|-------------------------------|--------------------|
 | 506761   | Alojzov    | 205              | 145           | 144          | 29                           | 0                             | ...                |
